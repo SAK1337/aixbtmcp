@@ -1,6 +1,6 @@
 [project]
 name = "mcp-aixbt-server"
-version = "1.0.0"
+version = "0.5.0-alpha"
 description = "MCP Server for AIXBT Market Intelligence"
 readme = "README.md"
 requires-python = ">=3.11"
