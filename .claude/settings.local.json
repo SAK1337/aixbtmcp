@@ -19,7 +19,13 @@
       "Bash(pip install:*)",
       "Bash(timeout 5 python:*)",
       "Bash(where:*)",
-      "Bash(DEBUG=1 timeout 10 python:*)"
+      "Bash(DEBUG=1 timeout 10 python:*)",
+      "Bash(timeout:*)",
+      "Bash(tasklist:*)",
+      "Bash(dir /s \"C:\\\\temp\\\\GitHub\\\\aixbtmcp\\\\tests\")",
+      "Bash(dir C:tempGitHubaixbtmcpdocs_mcp)",
+      "Bash(echo.)",
+      "Bash(touch:*)"
     ]
   }
 }
