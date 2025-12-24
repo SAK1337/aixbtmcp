@@ -1,6 +1,6 @@
 # MCP AIXBT Server
 
-> **Version 0.5 Alpha** - This software requires extensive testing. Use at your own risk.
+> **Version 0.5** - This server is lightly tested but working. Use at your own risk.
 
 A Model Context Protocol (MCP) server that wraps the AIXBT cryptocurrency intelligence API, enabling AI assistants to access real-time crypto market insights.
 
