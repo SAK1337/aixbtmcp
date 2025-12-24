@@ -5,7 +5,21 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(git push:*)",
-      "Skill(openspec:proposal)"
+      "Skill(openspec:proposal)",
+      "Skill(openspec:apply)",
+      "Bash(mkdir -p:*)",
+      "Bash(powershell:*)",
+      "Bash(echo:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(tasklist /FI \"PID eq 6908\")",
+      "Bash(taskkill:*)",
+      "Bash(uvicorn:*)",
+      "Bash(curl:*)",
+      "Bash(pip install:*)",
+      "Bash(timeout 5 python:*)",
+      "Bash(where:*)",
+      "Bash(DEBUG=1 timeout 10 python:*)"
     ]
   }
 }

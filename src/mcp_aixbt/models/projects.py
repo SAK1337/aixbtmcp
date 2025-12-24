@@ -2,9 +2,9 @@
 
 from datetime import datetime
 from enum import Enum
-from typing import Any, Optional
+from typing import Any, Optional, Union
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 class SignalCategory(str, Enum):
@@ -35,9 +35,9 @@ class Cluster(BaseModel):
 class CoingeckoData(BaseModel):
     """CoinGecko metadata for a project."""
 
-    api_id: str = Field(alias="apiId")
+    api_id: Optional[str] = Field(default=None, alias="apiId")
     type: Optional[str] = None
-    symbol: str
+    symbol: Optional[str] = None
     slug: Optional[str] = None
     description: Optional[str] = None
     homepage: Optional[str] = None
@@ -56,11 +56,24 @@ class Signal(BaseModel):
     description: str
     project_name: str = Field(alias="projectName")
     project_id: str = Field(alias="projectId")
-    category: SignalCategory
+    category: Optional[SignalCategory] = None
     official_sources: list[str] = Field(default_factory=list, alias="officialSources")
     clusters: list[Cluster] = Field(default_factory=list)
 
     model_config = {"populate_by_name": True}
+
+    @field_validator("category", mode="before")
+    @classmethod
+    def parse_category(cls, v: Any) -> Optional[SignalCategory]:
+        """Handle empty string or invalid category from API."""
+        if v is None or v == "":
+            return None
+        if isinstance(v, SignalCategory):
+            return v
+        try:
+            return SignalCategory(v)
+        except ValueError:
+            return None
 
 
 class Project(BaseModel):
@@ -78,6 +91,16 @@ class Project(BaseModel):
     signals: list[Signal] = Field(default_factory=list)
 
     model_config = {"populate_by_name": True}
+
+    @field_validator("tokens", mode="before")
+    @classmethod
+    def parse_tokens(cls, v: Any) -> dict[str, str]:
+        """Handle empty list or invalid tokens from API."""
+        if v is None or v == []:
+            return {}
+        if isinstance(v, dict):
+            return v
+        return {}
 
 
 class ClusterCount(BaseModel):
