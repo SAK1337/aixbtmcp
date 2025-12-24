@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  mcp-aixbt:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mcp-aixbt-server
+    restart: unless-stopped
+    ports:
+      - "${PORT:-8000}:8000"
+    environment:
+      - AIXBT_API_KEY=${AIXBT_API_KEY}
+      - EVM_PRIVATE_KEY=${EVM_PRIVATE_KEY:-}
+      - BASE_RPC_URL=${BASE_RPC_URL:-https://mainnet.base.org}
+      - HOST=0.0.0.0
+      - PORT=8000
+      - DEBUG=${DEBUG:-false}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - LOG_FORMAT=${LOG_FORMAT:-json}
+      - CACHE_TTL_SECONDS=${CACHE_TTL_SECONDS:-300}
+      - MAX_PRICE_PER_CALL_USDC=${MAX_PRICE_PER_CALL_USDC:-1.0}
+      - MAX_SPEND_PER_DAY_USDC=${MAX_SPEND_PER_DAY_USDC:-10.0}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import httpx; httpx.get('http://localhost:8000/health/live')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 512M
+        reservations:
+          cpus: "0.25"
+          memory: 128M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
