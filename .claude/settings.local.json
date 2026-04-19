@@ -25,7 +25,8 @@
       "Bash(dir /s \"C:\\\\temp\\\\GitHub\\\\aixbtmcp\\\\tests\")",
       "Bash(dir C:tempGitHubaixbtmcpdocs_mcp)",
       "Bash(echo.)",
-      "Bash(touch:*)"
+      "Bash(touch:*)",
+      "Bash(wc -l \"C:/temp/GitHub/aixbtmcp/src/mcp_aixbt\"/**/*.py)"
     ]
   }
 }

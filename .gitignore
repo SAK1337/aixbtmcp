@@ -69,3 +69,4 @@ Thumbs.db
 .env
 *.pem
 *.key
+.claude/settings.local.json
